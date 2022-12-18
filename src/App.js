@@ -1,16 +1,23 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Alert, TextInput} from 'react-native';
+import StartButton from './components/StartButton';
 
 export default class App extends React.Component {
-  state = {};
+  state = {
+    content: '',
+  };
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.box}>
-            <Text>나의 첫 앱 </Text>
-            <Text>실행 완료!</Text>
-        </View>
+        <TextInput 
+        style={styles.input} 
+        placeholder="여기에 입력해주세요." 
+        onChangeText={text=> {
+          this.setState({content: text})
+        }}
+        />
+        <StartButton showAlert={() => Alert.alert(this.state.content)} disabled={this.state.content.length > 0 ? false : true}/>
       </View>
     );
   }
@@ -24,12 +31,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   box: {
-    backgroundColor: '#E0E0E0',
-    padding: 32,
-    paddingBottom:0,
-    margin: 128,
-    borderWidth: 1,
-    borderColor: '#E0E0E0',
+    backgroundColor: '#6830CF',
+    padding: 16,
     flexDirection: 'row'
   },
+  first: {
+    fontSize: 20,
+    color: '#FFFFFF',
+    fontWeight: '600',
+    padding: 16,
+  },
+  input: {
+    width: '100%',
+    textAlign: 'center',
+    marginBottom: 16,
+    
+  }
 });
